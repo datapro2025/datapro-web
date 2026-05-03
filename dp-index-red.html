@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DataPro Technology — Empowering Data Management Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300;1,9..144,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════ */
+:root {
+  --white: #ffffff;
+  --off: #fdf6f3;
+  --off2: #f7ede8;
+  --ink: #1a2236;
+  --ink2: #1a2236;
+  --slate: #5c5248;
+  --muted: #9a8f86;
+  --rule: rgba(26,34,54,0.08);
+  --rule2: rgba(26,34,54,0.14);
+
+  /* Brand palette — Terracotta / Navy */
+  --blue: #c8401a;
+  --blue-light: #e8714a;
+  --blue-pale: #fde8e2;
+  --cyan: #e8714a;
+  --cyan-pale: #fef0ea;
+  --violet: #1a2236;
+  --green: #b03615;
+
+  --sans: 'Outfit', sans-serif;
+  --serif: 'Fraunces', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --r: 8px;
+  --r2: 16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--off); }
+::-webkit-scrollbar-thumb { background: #e8714a; border-radius: 4px; }
+
+/* ══════════════════════════════════════════
+   LOGO SVG (reusable via CSS class)
+══════════════════════════════════════════ */
+.logo-mark svg { display: block; }
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 3rem; height: 80px;
+}
+.nav-logo { text-decoration: none; display: flex; align-items: center; }
+.nav-links { list-style: none; display: flex; gap: 2.5rem; }
+.nav-links a {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--slate); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--blue); }
+.nav-cta {
+  font-family: var(--sans); font-weight: 600; font-size: 0.85rem;
+  background: var(--blue); color: var(--white);
+  padding: 0.6rem 1.5rem; border-radius: 100px; text-decoration: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(200,64,26,0.25);
+}
+.nav-cta:hover { background: var(--blue-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,64,26,0.35); }
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#hero {
+  min-height: 100svh;
+  padding: 120px 3rem 5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #fdf6f3 0%, #ffffff 45%, #fef0ea 100%);
+}
+
+/* Decorative blobs */
+.blob {
+  position: absolute; border-radius: 50%; filter: blur(80px);
+  pointer-events: none; z-index: 0;
+}
+.blob-1 { width: 600px; height: 600px; top: -200px; right: -100px; background: rgba(200,64,26,0.09); }
+.blob-2 { width: 400px; height: 400px; bottom: 0; left: -100px; background: rgba(232,113,74,0.09); }
+.blob-3 { width: 300px; height: 300px; top: 40%; right: 20%; background: rgba(26,34,54,0.04); }
+
+/* Dot grid */
+.dot-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(circle, rgba(200,64,26,0.1) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 90%);
+}
+
+.hero-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  max-width: 1280px; margin: 0 auto; width: 100%;
+}
+
+.hero-left {}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--blue);
+  background: var(--blue-pale); border: 1px solid rgba(200,64,26,0.2);
+  border-radius: 100px; padding: 0.35rem 0.9rem; margin-bottom: 1.75rem;
+  opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+}
+.hero-eyebrow::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--blue); animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+h1 {
+  font-family: var(--sans); font-weight: 800;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 1.08; letter-spacing: -0.03em;
+  color: var(--ink); margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+}
+h1 .gradient-text {
+  background: linear-gradient(135deg, #c8401a 0%, #e8714a 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+h1 .serif-text {
+  font-family: var(--serif); font-weight: 300; font-style: italic;
+  color: var(--slate); -webkit-text-fill-color: var(--slate);
+}
+
+.hero-sub {
+  font-size: 1.05rem; color: var(--slate); line-height: 1.75;
+  max-width: 50ch; margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+}
+
+.hero-actions {
+  display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+}
+.btn-primary {
+  font-family: var(--sans); font-weight: 700; font-size: 0.9rem;
+  background: var(--blue); color: var(--white);
+  padding: 0.85rem 2rem; border-radius: 100px; text-decoration: none;
+  border: none; cursor: pointer; display: inline-block;
+  box-shadow: 0 4px 20px rgba(200,64,26,0.3);
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,64,26,0.4); }
+.btn-secondary {
+  font-family: var(--sans); font-weight: 600; font-size: 0.9rem;
+  color: var(--ink); background: transparent;
+  border: 1.5px solid var(--rule2); border-radius: 100px;
+  padding: 0.85rem 2rem; text-decoration: none; display: inline-block;
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+
+/* Hero visual — animated logo showcase */
+.hero-right {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  opacity: 0; animation: fadeIn 1s 0.4s forwards;
+}
+.hero-visual-card {
+  background: white;
+  border: 1px solid var(--rule2);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 24px 80px rgba(200,64,26,0.1), 0 4px 16px rgba(0,0,0,0.06);
+  width: 100%; max-width: 440px;
+  position: relative; overflow: hidden;
+}
+.hero-visual-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #c8401a, #e8714a, #1a2236);
+}
+.hvc-label {
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 2rem;
+}
+.hvc-logo-display {
+  display: flex; justify-content: center; margin-bottom: 2rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.hvc-tagline {
+  font-family: var(--serif); font-style: italic; font-size: 1rem;
+  color: var(--slate); text-align: center; margin-top: 1.5rem; line-height: 1.5;
+}
+
+/* Hero stats strip */
+.hero-stats-strip {
+  position: relative; z-index: 1;
+  display: flex; gap: 0; margin-top: 4rem;
+  border: 1px solid var(--rule2); border-radius: var(--r2);
+  background: white; overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  opacity: 0; animation: fadeUp 0.7s 0.7s forwards;
+  max-width: fit-content;
+}
+.stat-block {
+  padding: 1.5rem 2.5rem; border-right: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+.stat-block:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--sans); font-weight: 800; font-size: 1.8rem;
+  line-height: 1; color: var(--blue); letter-spacing: -0.03em;
+  margin-bottom: 0.2rem;
+}
+.stat-l {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* ══════════════════════════════════════════
+   MARQUEE
+══════════════════════════════════════════ */
+.marquee-band {
+  overflow: hidden; background: var(--ink); padding: 0.9rem 0;
+  border-top: 3px solid #c8401a;
+}
+.marquee-track {
+  display: flex; gap: 2.5rem; white-space: nowrap;
+  animation: marquee 35s linear infinite;
+}
+.mt-item {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35); flex-shrink: 0;
+}
+.mt-sep { color: #e8714a !important; opacity: 1 !important; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ══════════════════════════════════════════
+   SHARED SECTION STYLES
+══════════════════════════════════════════ */
+section { padding: 7rem 3rem; }
+.section-inner { max-width: 1280px; margin: 0 auto; }
+.chip {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--blue);
+  background: var(--blue-pale); border: 1px solid rgba(200,64,26,0.2);
+  border-radius: 100px; padding: 0.28rem 0.8rem; margin-bottom: 1rem;
+}
+h2 {
+  font-family: var(--sans); font-weight: 800;
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  line-height: 1.1; letter-spacing: -0.025em; color: var(--ink);
+  margin-bottom: 1rem;
+}
+h2 .italic { font-family: var(--serif); font-weight: 300; font-style: italic; color: var(--slate); }
+.section-lead { font-size: 1.05rem; color: var(--slate); line-height: 1.75; }
+
+/* ══════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════ */
+#about { background: var(--off); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-text p { color: var(--slate); margin-bottom: 1.1rem; line-height: 1.75; }
+
+.value-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.value-row {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.9rem 1.1rem; background: white;
+  border: 1px solid var(--rule2); border-radius: var(--r);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.value-row:hover { border-color: rgba(200,64,26,0.3); box-shadow: 0 2px 12px rgba(200,64,26,0.08); }
+.vr-icon { font-size: 1.1rem; width: 30px; flex-shrink: 0; }
+.vr-text { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+.vr-sub { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); margin-left: auto; white-space: nowrap; }
+
+.about-card-stack { display: flex; flex-direction: column; gap: 1.25rem; }
+.acard {
+  background: white; border: 1px solid var(--rule2); border-radius: var(--r2);
+  padding: 2rem; position: relative; overflow: hidden;
+}
+.acard.primary {
+  background: var(--ink2); border-color: transparent;
+  box-shadow: 0 16px 48px rgba(13,15,26,0.2);
+}
+.acard.primary::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+}
+.acard-quote {
+  font-family: var(--serif); font-style: italic; font-size: 1.1rem;
+  line-height: 1.55; color: rgba(255,255,255,0.9); margin-bottom: 1rem;
+}
+.acard-author { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; color: #e8714a; text-transform: uppercase; }
+.acard-award { display: flex; align-items: flex-start; gap: 0.9rem; }
+.award-badge {
+  width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+}
+.award-body strong { font-weight: 700; font-size: 0.88rem; color: var(--ink); display: block; margin-bottom: 0.2rem; }
+.award-body span { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+/* ══════════════════════════════════════════
+   SERVICES
+══════════════════════════════════════════ */
+#services { background: white; }
+.services-head { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3.5rem; }
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.svc-card {
+  background: var(--off); border: 1px solid var(--rule2); border-radius: var(--r2);
+  padding: 2rem; transition: all 0.25s; cursor: default;
+  position: relative; overflow: hidden;
+}
+.svc-card:hover { border-color: var(--blue); box-shadow: 0 8px 32px rgba(200,64,26,0.1); transform: translateY(-3px); }
+.svc-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #c8401a, #e8714a);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.svc-card:hover::after { transform: scaleX(1); }
+.svc-icon {
+  width: 48px; height: 48px; border-radius: 12px; margin-bottom: 1.25rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem;
+  background: linear-gradient(135deg, var(--blue-pale), var(--cyan-pale));
+  border: 1px solid rgba(200,64,26,0.15);
+}
+.svc-card h3 { font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem; color: var(--ink); }
+.svc-card p { font-size: 0.85rem; color: var(--slate); line-height: 1.7; margin-bottom: 1rem; }
+.svc-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.s-tag {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.05em;
+  border: 1px solid var(--rule2); border-radius: 4px;
+  padding: 0.18rem 0.5rem; color: var(--muted);
+}
+
+/* ══════════════════════════════════════════
+   TECH
+══════════════════════════════════════════ */
+#tech { background: var(--ink); }
+#tech .chip { color: #e8714a; background: rgba(232,113,74,0.12); border-color: rgba(232,113,74,0.25); }
+#tech h2 { color: white; }
+#tech h2 .italic { color: rgba(255,255,255,0.45); }
+#tech .section-lead { color: rgba(255,255,255,0.45); }
+
+.tech-head { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3.5rem; }
+.tech-cats { display: flex; flex-direction: column; gap: 2rem; }
+.tcat-label {
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 0.75rem;
+}
+.tcat-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tpill {
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em;
+  padding: 0.45rem 0.95rem; border-radius: var(--r);
+  border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.04); transition: all 0.2s; cursor: default;
+}
+.tpill:hover { border-color: rgba(232,113,74,0.5); color: #e8714a; background: rgba(232,113,74,0.08); }
+.tpill.hi { border-color: rgba(200,64,26,0.5); color: #e8714a; background: rgba(200,64,26,0.12); }
+
+/* ══════════════════════════════════════════
+   SECTORS
+══════════════════════════════════════════ */
+#sectors { background: var(--off); }
+.sectors-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
+.sector-table { display: flex; flex-direction: column; }
+.sector-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 0.5rem; border-bottom: 1px solid var(--rule2);
+  border-radius: 0; transition: all 0.2s; cursor: default;
+}
+.sector-row:hover { padding-left: 1rem; background: var(--blue-pale); border-radius: var(--r); border-color: transparent; }
+.sector-row:hover .sname { color: #c8401a; }
+.sname {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-weight: 600; font-size: 0.95rem; color: var(--ink); transition: color 0.2s;
+}
+.sname-ico { font-size: 1rem; }
+.sdesc { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.05em; color: var(--muted); }
+
+.sector-aside { display: flex; flex-direction: column; gap: 1.25rem; }
+.reach-card {
+  background: white; border: 1px solid var(--rule2); border-radius: var(--r2);
+  padding: 1.75rem;
+}
+.rc-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 1rem; }
+.rc-flags { display: flex; flex-direction: column; gap: 0.5rem; }
+.rflag {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-family: var(--mono); font-size: 0.72rem; color: var(--slate);
+  padding: 0.6rem 0.85rem; border: 1px solid var(--rule);
+  border-radius: var(--r); background: var(--off); transition: all 0.2s;
+}
+.rflag:hover { border-color: #c8401a; color: #c8401a; }
+
+.why-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.wm-card {
+  background: white; border: 1px solid var(--rule2); border-radius: var(--r);
+  padding: 1.25rem;
+}
+.wm-num {
+  font-family: var(--serif); font-style: italic; font-size: 1.8rem;
+  color: var(--rule2); line-height: 1; margin-bottom: 0.5rem;
+}
+.wm-card h4 { font-weight: 700; font-size: 0.82rem; margin-bottom: 0.3rem; }
+.wm-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+
+/* ══════════════════════════════════════════
+   PROCESS
+══════════════════════════════════════════ */
+#process { background: white; }
+.process-head { max-width: 560px; margin-bottom: 4rem; }
+.steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.step-card {
+  background: var(--off); border: 1px solid var(--rule2); border-radius: var(--r2);
+  padding: 2rem 1.5rem; position: relative; transition: all 0.25s;
+}
+.step-card:hover { border-color: var(--blue); box-shadow: 0 4px 24px rgba(200,64,26,0.1); }
+.step-num-badge {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, #c8401a, #e8714a);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.85rem; color: white;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 12px rgba(200,64,26,0.35);
+}
+.step-card h4 { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+.step-card p { font-size: 0.83rem; color: var(--slate); line-height: 1.65; }
+.step-emoji { font-size: 1.3rem; margin-bottom: 0.5rem; }
+
+/* ══════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════ */
+#contact {
+  background: linear-gradient(160deg, #fdf6f3 0%, #ffffff 60%);
+}
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+.contact-info h2 { margin-bottom: 1rem; }
+.contact-info p { color: var(--slate); margin-bottom: 2.5rem; }
+.cdetails { display: flex; flex-direction: column; gap: 0; }
+.citem {
+  display: flex; flex-direction: column; gap: 0.25rem;
+  padding: 1.1rem 0; border-bottom: 1px solid var(--rule2);
+}
+.clabel {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+}
+.cval { font-weight: 600; font-size: 1rem; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+a.cval:hover { color: var(--blue); }
+
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field label {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.field input, .field textarea, .field select {
+  background: white; border: 1.5px solid var(--rule2);
+  color: var(--ink); font-family: var(--sans); font-size: 0.9rem;
+  padding: 0.75rem 1rem; border-radius: var(--r); outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); }
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(200,64,26,0.12);
+}
+.field textarea { height: 120px; resize: vertical; }
+.send-btn {
+  background: linear-gradient(135deg, #c8401a, #e8714a);
+  color: white; font-family: var(--sans); font-weight: 700; font-size: 0.95rem;
+  padding: 1rem; border: none; border-radius: var(--r);
+  cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(200,64,26,0.3);
+  margin-top: 0.5rem;
+}
+.send-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,64,26,0.4); }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer {
+  background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 2.5rem 3rem;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.25rem;
+}
+.footer-left { display: flex; align-items: center; gap: 1.5rem; }
+.footer-tagline { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+.footer-right { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.2); text-align: right; line-height: 1.8; }
+
+/* ══════════════════════════════════════════
+   REVEAL
+══════════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 960px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { display: none; }
+  section { padding: 5rem 1.25rem; }
+  #hero { padding: 100px 1.25rem 4rem; }
+  .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-right { display: none; }
+  .hero-stats-strip { flex-wrap: wrap; }
+  .about-grid, .services-head, .tech-head, .sectors-grid, .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  .svc-grid { grid-template-columns: 1fr 1fr; }
+  .steps-row { grid-template-columns: 1fr 1fr; }
+  .why-mini { grid-template-columns: 1fr 1fr; }
+  footer { flex-direction: column; align-items: flex-start; }
+  .footer-right { text-align: left; }
+}
+@media (max-width: 560px) {
+  h1 { font-size: 2.2rem; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .steps-row { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .why-mini { grid-template-columns: 1fr; }
+  .hero-stats-strip { width: 100%; }
+  .stat-block { flex: 1; padding: 1.25rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ NAV ════════════════════ -->
+<nav>
+  <a class="nav-logo" href="#">
+    <svg width="280" height="58" viewBox="0 0 280 58" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="DataPro Technology">
+      <!-- Flat-top hexagon, centre (24,29), radius 24 -->
+      <polygon points="24,5 44,17 44,41 24,53 4,41 4,17"
+               fill="none" stroke="#c8401a" stroke-width="1.8"/>
+      <polygon points="24,13 36,20 36,38 24,45 12,38 12,20"
+               fill="#c8401a" opacity="0.08"/>
+      <circle cx="24" cy="29" r="5" fill="#c8401a"/>
+      <circle cx="24" cy="29" r="9.5" fill="none" stroke="#c8401a" stroke-width="0.9" opacity="0.28"/>
+      <circle cx="24" cy="5"  r="3" fill="#e8714a"/>
+      <circle cx="44" cy="17" r="3" fill="#e8714a"/>
+      <circle cx="44" cy="41" r="3" fill="#1a2236"/>
+      <circle cx="24" cy="53" r="3" fill="#1a2236"/>
+      <circle cx="4"  cy="41" r="3" fill="#c8401a"/>
+      <circle cx="4"  cy="17" r="3" fill="#c8401a"/>
+      <!-- Wordmark — DataPro in dark navy ink -->
+      <text x="60" y="37" font-family="Outfit, sans-serif" font-weight="800" font-size="27" letter-spacing="-0.7" fill="#1a2236">DataPro</text>
+      <line x1="60" y1="43" x2="280" y2="43" stroke="#e8d5ce" stroke-width="0.8"/>
+      <text x="60" y="54" font-family="IBM Plex Mono, monospace" font-weight="400" font-size="10" letter-spacing="3.8" fill="#9a8f86">TECHNOLOGY</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#tech">Technology</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section id="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="dot-grid"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Data Intelligence · Australia</div>
+      <h1>
+        Empowering<br>
+        <span class="gradient-text">Data Management</span><br>
+        <span class="serif-text">Solutions.</span>
+      </h1>
+      <p class="hero-sub">Senior data consultants helping organisations achieve total information awareness — through expert database performance, cloud architecture, AI/ML, and analytics. Global experience, local engagement.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Start a Conversation</a>
+        <a href="#services" class="btn-secondary">Explore Services ↓</a>
+      </div>
+
+      <div class="hero-stats-strip">
+        <div class="stat-block">
+          <div class="stat-n">20+</div>
+          <div class="stat-l">Years Experience</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-n">17+</div>
+          <div class="stat-l">Avg. Consultant Yrs</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-n">9+</div>
+          <div class="stat-l">Industry Sectors</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-n">100%</div>
+          <div class="stat-l">Senior Delivery</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-visual-card">
+        <!--<div class="hvc-label">Brand Identity · 2025</div> -->
+        <!-- Large logo for hero card -->
+        <div class="hvc-logo-display">
+          <svg width="300" height="66" viewBox="0 0 300 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="28,5 50,18 50,44 28,57 6,44 6,18" fill="none" stroke="#c8401a" stroke-width="2"/>
+            <polygon points="28,14 42,22 42,42 28,50 14,42 14,22" fill="#c8401a" opacity="0.08"/>
+            <circle cx="28" cy="31" r="6" fill="#c8401a"/>
+            <circle cx="28" cy="31" r="11" fill="none" stroke="#c8401a" stroke-width="1" opacity="0.25"/>
+            <circle cx="28" cy="5"  r="3.5" fill="#e8714a"/>
+            <circle cx="50" cy="18" r="3.5" fill="#e8714a"/>
+            <circle cx="50" cy="44" r="3.5" fill="#1a2236"/>
+            <circle cx="28" cy="57" r="3.5" fill="#1a2236"/>
+            <circle cx="6"  cy="44" r="3.5" fill="#c8401a"/>
+            <circle cx="6"  cy="18" r="3.5" fill="#c8401a"/>
+            <text x="68" y="43" font-family="Outfit, sans-serif" font-weight="800" font-size="32" letter-spacing="-0.8" fill="#1a2236">DataPro</text>
+            <line x1="68" y1="49" x2="300" y2="49" stroke="#e8d5ce" stroke-width="0.8"/>
+            <text x="68" y="61" font-family="IBM Plex Mono, monospace" font-weight="400" font-size="11" letter-spacing="4.2" fill="#9a8f86">TECHNOLOGY</text>
+          </svg>
+        </div>
+        <p class="hvc-tagline">"Assisting people and businesses<br>achieve total information awareness."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ MARQUEE ════════════════════ -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Database Performance Tuning</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Data Architecture</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Cloud Migration</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">AI & Machine Learning</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Data Governance</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">High Availability & Disaster Recovery</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Business Intelligence</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Security & Compliance</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Managed Database Support</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Analytics & Reporting</span>
+    <!-- dupe -->
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Database Performance Tuning</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Data Architecture</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Cloud Migration</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">AI & Machine Learning</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Data Governance</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">High Availability & Disaster Recovery</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Business Intelligence</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Security & Compliance</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Managed Database Support</span>
+    <span class="mt-item mt-sep">◆</span><span class="mt-item">Analytics & Reporting</span>
+  </div>
+</div>
+
+<!-- ════════════════════ ABOUT ════════════════════ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="chip">Who We Are</div>
+        <h2>Senior experts.<br><span class="italic">Serious results.</span></h2>
+        <p>DataPro Technology is a team of senior-only data consultants skilled in management and custom solutions across every layer of the modern data stack. We find the way to unlock your data, empower people with information, and return real value to the business.</p>
+        <p>Our experience is global — our engagement is local. We've delivered solutions for partners from telecommunications, finance, transport, entertainment, healthcare, legal, hospitality, renewable energy, and government sectors across Australia.</p>
+        <p>We believe your data is a core asset: a single source of truth capable of driving sound business decisions and efficient operations.</p>
+        <div class="value-list">
+          <div class="value-row"><span class="vr-icon">🎯</span><span class="vr-text">Senior-only consultants</span><span class="vr-sub">No juniors, ever</span></div>
+          <div class="value-row"><span class="vr-icon">🌏</span><span class="vr-text">Global delivery capability</span><span class="vr-sub">AU · US · APAC</span></div>
+          <div class="value-row"><span class="vr-icon">⚡</span><span class="vr-text">Mission-critical environments</span><span class="vr-sub">Performance-first</span></div>
+          <div class="value-row"><span class="vr-icon">🔒</span><span class="vr-text">Governed & compliant</span><span class="vr-sub">Regulated industries</span></div>
+        </div>
+      </div>
+
+      <div class="about-card-stack reveal" style="transition-delay:0.15s">
+        <div class="acard primary">
+          <div class="acard-quote">"Assisting people and businesses achieve total information awareness is our remit. Data governance is essential to achieving data availability, usability, integrity, security and trust."</div>
+          <div class="acard-author">— Director, DataPro Technology</div>
+        </div>
+       <!-- <div class="acard">
+          <div class="acard-award">
+            <div class="award-badge">🏆</div>
+            <div class="award-body">
+              <strong>Best IT Database Consultancy 2025</strong>
+              <span>Recognised by APAC CIO Outlook for our senior-only delivery model and proven track record supporting performance-critical systems where reliability and scalability are essential.</span>
+            </div>
+          </div>
+        </div>-->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ SERVICES ════════════════════ -->
+<section id="services">
+  <div class="section-inner">
+    <div class="services-head reveal">
+      <div>
+        <div class="chip">What We Do</div>
+        <h2>Full-stack data<br><span class="italic">expertise.</span></h2>
+      </div>
+      <p class="section-lead">We develop strategies and use technology to ensure your data stays in compliance, drives decisions, and creates lasting value — from architecture through to analytics.</p>
+    </div>
+    <div class="svc-grid reveal">
+      <div class="svc-card">
+        <div class="svc-icon">⚡</div>
+        <h3>Performance Tuning</h3>
+        <p>Proactively engage in complex performance testing and tuning for databases and applications critical to your business success.</p>
+        <div class="svc-tags"><span class="s-tag">Load Testing</span><span class="s-tag">Query Optimisation</span><span class="s-tag">Benchmarking</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🏗️</div>
+        <h3>Data Architecture</h3>
+        <p>From software licensing and infrastructure design through to complex data pipelines — your entire data environment, expertly crafted.</p>
+        <div class="svc-tags"><span class="s-tag">Cloud & Hybrid</span><span class="s-tag">Data Pipelines</span><span class="s-tag">Data Platforms & Integration</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">☁️</div>
+        <h3>Cloud Migration</h3>
+        <p>Seamless migration strategies for moving your data workloads to cloud and hybrid environments with minimal downtime and full data integrity.</p>
+        <div class="svc-tags"><span class="s-tag">AWS</span><span class="s-tag">Azure</span><span class="s-tag">Google Cloud</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📊</div>
+        <h3>Analytics & BI</h3>
+        <p>Through streamlined access to your data, we extend the palette of reporting and analytics that feeds business intelligence and decision-making.</p>
+        <div class="svc-tags"><span class="s-tag">Dashboards</span><span class="s-tag">Reporting</span><span class="s-tag">Self-service BI</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🤖</div>
+        <h3>AI & Machine Learning</h3>
+        <p>Combining deep industry expertise with the latest cognitive services to help you build a smarter, data-driven business.</p>
+        <div class="svc-tags"><span class="s-tag">AI Strategy</span><span class="s-tag">ML Platforms</span><span class="s-tag">GenAI</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔐</div>
+        <h3>Security & Compliance</h3>
+        <p>We mine and scrape your logs to illuminate strengths, weaknesses, and vulnerabilities — whilst meeting all internal and external compliance requirements.</p>
+        <div class="svc-tags"><span class="s-tag">Audit</span><span class="s-tag">Data Governance</span><span class="s-tag">DR Planning</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ TECH ════════════════════ -->
+<section id="tech">
+  <div class="section-inner">
+    <div class="tech-head reveal">
+      <div>
+        <div class="chip">Technology</div>
+        <h2>We speak<br><span class="italic">your stack.</span></h2>
+      </div>
+      <p class="section-lead">Decades of hands-on experience across every major database platform, cloud provider, and modern data tool. Technology-agnostic — we choose what's right for you.</p>
+    </div>
+    <div class="tech-cats reveal">
+      <div>
+        <div class="tcat-label">Databases</div>
+        <div class="tcat-pills">
+          <span class="tpill hi">Oracle</span><span class="tpill hi">SQL Server</span><span class="tpill hi">PostgreSQL</span>
+          <span class="tpill hi">MySQL</span><span class="tpill hi">MongoDB</span><span class="tpill hi">Redshift</span>
+          <span class="tpill hi">TimescaleDB</span><span class="tpill hi">SAP HANA</span><span class="tpill hi">Clickhouse</span>
+        </div>
+      </div>
+      <div>
+        <div class="tcat-label">Cloud & Platforms</div>
+        <div class="tcat-pills">
+          <span class="tpill hi">Google Cloud</span><span class="tpill hi">AWS</span><span class="tpill hi">Azure</span>
+          <span class="tpill hi">Databricks</span><span class="tpill hi">Snowflake</span><span class="tpill hi">Microsoft Fabric</span>
+        </div>
+      </div>
+      <div>
+        <div class="tcat-label">Analytics & AI</div>
+        <div class="tcat-pills">
+          <span class="tpill hi">Power BI</span><span class="tpill hi">Tableau</span><span class="tpill hi">dbt</span>
+          <span class="tpill hi">OpenAI</span><span class="tpill hi">LangChain</span><span class="tpill hi">Anthropic</span><span class="tpill hi">Apache Spark</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ SECTORS ════════════════════ -->
+<section id="sectors">
+  <div class="section-inner">
+    <div class="sectors-grid">
+      <div class="reveal">
+        <div class="chip">04 — Sectors</div>
+        <h2>Trusted across<br><span class="italic">industries.</span></h2>
+        <p class="section-lead" style="margin-bottom:2rem;">From global financial institutions to local government, emerging renewable energy ventures and media giants — our reach spans every sector where data matters.</p>
+
+        <div class="why-mini">
+          <div class="wm-card"><div class="wm-num">01</div><h4>Senior Consultants</h4><p>Every consultant averages 17+ years. Seasoned expertise from day one.</p></div>
+          <div class="wm-card"><div class="wm-num">02</div><h4>Mission-Critical</h4><p>Trusted in regulated, high-stakes environments where downtime isn't an option.</p></div>
+          <div class="wm-card"><div class="wm-num">03</div><h4>Tech-Agnostic</h4><p>No vendor allegiances. We recommend whatever best solves your problem.</p></div>
+          <div class="wm-card"><div class="wm-num">04</div><h4>Partnership</h4><p>Long-term partners, not one-off vendors. We stay engaged.</p></div>
+        </div>
+
+       <!-- <div class="sector-aside" style="margin-top:1.5rem;">
+          <div class="reach-card">
+            <div class="rc-title">Global Reach</div>
+            <div class="rc-flags">
+              <div class="rflag">🇦🇺 <span>Australia — Melbourne / Sydney / Brisbane / Adelaide / Perth</span></div>
+              <div class="rflag">🇺🇸 <span>United States — Wall Street & beyond</span></div> 
+              <div class="rflag">🌏 <span>Asia Pacific — Regional delivery</span></div>
+            </div>
+          </div>  
+        </div> 
+      </div> -->
+
+      <div class="reveal" style="transition-delay:0.15s">
+        <div class="sector-table">
+          <div class="sector-row"><span class="sname"><span class="sname-ico">🏦</span> Financial Services</span><span class="sdesc">Banking · Insurance · Trading</span></div>
+          <div class="sector-row"><span class="sname"><span class="sname-ico">📡</span> Telecommunications</span><span class="sdesc">Carriers · ISPs · Networks</span></div>
+          <div class="sector-row"><span class="sname"><span class="sname-ico">🏛️</span> Government</span><span class="sdesc">Federal · State · Local</span></div>
+          <div class="sector-row"><span class="sname"><span class="sname-ico">🚛</span> Transport & Logistics</span><span class="sdesc">Rail · Road · Supply Chain</span></div>
+          <div class="sector-row"><span class="sname"><span class="sname-ico">⚡</span> Energy & Utilities</span><span class="sdesc">Renewables · Grid · Water</span></div>
+          <div class="sector-row"><span class="sname"><span class="sname-ico">⚖️</span> Legal</span><span class="sdesc">Law Firms · Courts · Compliance</span></div>
+          <div class="sector-row"><span class="sname"><span class="sname-ico">🎬</span> Media & Entertainment</span><span class="sdesc">Publishing · Streaming · Games</span></div>
+          <div class="sector-row"><span class="sname"><span class="sname-ico">🏨</span> Hospitality & Retail</span><span class="sdesc">Hotels · F&B · Commerce</span></div>
+          <div class="sector-row"><span class="sname"><span class="sname-ico">🏥</span> Healthcare</span><span class="sdesc">Hospital . Clinical · Research · Pharma</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ PROCESS ════════════════════ -->
+<section id="process">
+  <div class="section-inner">
+    <div class="process-head reveal">
+      <div class="chip">How We Work</div>
+      <h2>From insight<br><span class="italic">to outcome.</span></h2>
+      <p class="section-lead">A refined delivery model built across hundreds of engagements. Clear, collaborative, and built around your success.</p>
+    </div>
+    <div class="steps-row reveal">
+      <div class="step-card">
+        <div class="step-emoji">🔍</div>
+        <div class="step-num-badge">01</div>
+        <h4>Discover</h4>
+        <p>Deep-dive into your current data environment, pain points, and business goals. No assumptions — we learn your world first.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-emoji">🗺️</div>
+        <div class="step-num-badge">02</div>
+        <h4>Strategise</h4>
+        <p>Develop a clear roadmap and solution architecture aligned to your priorities, budget, and timelines. Pragmatic, not theoretical.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-emoji">🛠️</div>
+        <div class="step-num-badge">03</div>
+        <h4>Deliver</h4>
+        <p>Senior consultants implement with precision. Rigorous testing, clear documentation, and zero compromise on quality.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-emoji">🚀</div>
+        <div class="step-num-badge">04</div>
+        <h4>Optimise</h4>
+        <p>Ongoing support, monitoring, and improvement. We stay engaged to ensure your data investment compounds over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CONTACT ════════════════════ -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <div class="chip">Contact</div>
+        <h2>Let's talk about<br><span class="italic">your data.</span></h2>
+        <p>Learning happens in the mind and soul of the curious, not in the fodder of disorganised data. We aim to be your long-term partner on projects that secure knowledge through data.</p>
+
+        <div class="cdetails">
+          <div class="citem"><span class="clabel">Phone</span><a href="tel:+61430176049" class="cval">+61 430 176 049</a></div>
+          <div class="citem"><span class="clabel">Email</span><a href="mailto:hello@datapro.technology" class="cval">hello@datapro.technology</a></div>
+        <!--<div class="citem"><span class="clabel">Website</span><a href="https://datapro.technology" class="cval">datapro.technology</a></div> -->  
+          <div class="citem"><span class="clabel">Location</span><span class="cval">Melbourne Australia</span></div>
+          <!--<div class="citem"><span class="clabel">Company</span><span class="cval" style="font-size:0.85rem;font-weight:500;color:var(--muted);">DataPro Technology Pty Ltd · ABN 48 650 323 434</span></div>-->
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:0.15s">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="field"><label>First Name</label><input type="text" placeholder="Jane"></div>
+            <div class="field"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+          </div>
+          <div class="field"><label>Email Address</label><input type="email" placeholder="jane@company.com.au"></div>
+          <div class="field"><label>Organisation</label><input type="text" placeholder="Your company"></div>
+          <div class="field">
+            <label>Area of Interest</label>
+            <select>
+              <option value="" disabled selected>Select a service…</option>
+              <option>Database Performance Tuning</option>
+              <option>Data Architecture</option>
+              <option>Cloud Migration</option>
+              <option>Analytics & Business Intelligence</option>
+              <option>AI & Machine Learning</option>
+              <option>Security & Compliance</option>
+              <option>Managed Database Support</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Tell us about your challenge</label>
+            <textarea placeholder="Describe your current situation and what outcome you're hoping to achieve…"></textarea>
+          </div>
+          <button class="send-btn" id="sendBtn">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer>
+  <div class="footer-left">
+    <!-- Footer logo (white version) -->
+    <svg width="230" height="48" viewBox="0 0 230 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="20,4 36,13 36,31 20,40 4,31 4,13" fill="none" stroke="#e8714a" stroke-width="1.6"/>
+      <polygon points="20,11 30,17 30,27 20,33 10,27 10,17" fill="#e8714a" opacity="0.1"/>
+      <circle cx="20" cy="22" r="4" fill="#e8714a"/>
+      <circle cx="20" cy="22" r="7.5" fill="none" stroke="#e8714a" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="20" cy="4"  r="2.5" fill="#e8a87c"/>
+      <circle cx="36" cy="13" r="2.5" fill="#e8a87c"/>
+      <circle cx="36" cy="31" r="2.5" fill="rgba(255,255,255,0.4)"/>
+      <circle cx="20" cy="40" r="2.5" fill="rgba(255,255,255,0.4)"/>
+      <circle cx="4"  cy="31" r="2.5" fill="#e8714a"/>
+      <circle cx="4"  cy="13" r="2.5" fill="#e8714a"/>
+      <text x="50" y="29" font-family="Outfit, sans-serif" font-weight="800" font-size="22" letter-spacing="-0.6" fill="white">DataPro</text>
+      <line x1="50" y1="34" x2="230" y2="34" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+      <text x="50" y="44" font-family="IBM Plex Mono, monospace" font-weight="400" font-size="8.5" letter-spacing="3.2" fill="rgba(255,255,255,0.28)">TECHNOLOGY</text>
+    </svg>
+    <span class="footer-tagline">Empowering Data Management Solutions</span>
+  </div>
+  <div class="footer-right">
+    Copyright © 2026 DataPro Technology — All Rights Reserved<br>
+    Melbourne Australia · ABN 48 650 323 434
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 55);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Nav active
+const secs = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+const io2 = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navAs.forEach(a => a.style.color = '');
+      const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (a) a.style.color = 'var(--blue)';
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+secs.forEach(s => io2.observe(s));
+
+// Form submit
+document.getElementById('sendBtn').addEventListener('click', function () {
+  const email = document.querySelector('#contact input[type="email"]').value;
+  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+  this.textContent = '✓ Message Sent — We\'ll be in touch soon';
+  this.style.background = 'linear-gradient(135deg, #00c896, #00a87a)';
+  this.disabled = true;
+});
+</script>
+</body>
+</html>
