@@ -932,31 +932,33 @@ footer {
 
       <div class="reveal" style="transition-delay:0.15s">
         <div class="contact-form">
-          <div class="form-row">
-            <div class="field"><label>First Name</label><input type="text" placeholder="Jane"></div>
-            <div class="field"><label>Last Name</label><input type="text" placeholder="Smith"></div>
-          </div>
-          <div class="field"><label>Email Address</label><input type="email" placeholder="jane@company.com.au"></div>
-          <div class="field"><label>Organisation</label><input type="text" placeholder="Your company"></div>
-          <div class="field">
-            <label>Area of Interest</label>
-            <select>
-              <option value="" disabled selected>Select a service…</option>
-              <option>Database Performance Tuning</option>
-              <option>Data Architecture</option>
-              <option>Cloud Migration</option>
-              <option>Analytics & Business Intelligence</option>
-              <option>AI & Machine Learning</option>
-              <option>Security & Compliance</option>
-              <option>Managed Database Support</option>
-              <option>General Enquiry</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Tell us about your challenge</label>
-            <textarea placeholder="Describe your current situation and what outcome you're hoping to achieve…"></textarea>
-          </div>
-          <button class="send-btn" id="sendBtn">Send Message →</button>
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="field"><label for="firstName">First Name</label><input id="firstName" name="firstName" type="text" placeholder="Jane"></div>
+              <div class="field"><label for="lastName">Last Name</label><input id="lastName" name="lastName" type="text" placeholder="Smith"></div>
+            </div>
+            <div class="field"><label for="emailAddress">Email Address</label><input id="emailAddress" name="emailAddress" type="email" placeholder="jane@company.com.au" required></div>
+            <div class="field"><label for="organisation">Organisation</label><input id="organisation" name="organisation" type="text" placeholder="Your company"></div>
+            <div class="field">
+              <label for="interest">Area of Interest</label>
+              <select id="interest" name="interest" required>
+                <option value="" disabled selected>Select a service…</option>
+                <option>Database Performance Tuning</option>
+                <option>Data Architecture</option>
+                <option>Cloud Migration</option>
+                <option>Analytics & Business Intelligence</option>
+                <option>AI & Machine Learning</option>
+                <option>Security & Compliance</option>
+                <option>Managed Database Support</option>
+                <option>General Enquiry</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">Tell us about your challenge</label>
+              <textarea id="message" name="message" placeholder="Describe your current situation and what outcome you're hoping to achieve…"></textarea>
+            </div>
+            <button class="send-btn" id="sendBtn" type="button">Send Message →</button>
+          </form>
         </div>
       </div>
     </div>
@@ -1017,12 +1019,46 @@ const io2 = new IntersectionObserver((entries) => {
 secs.forEach(s => io2.observe(s));
 
 // Form submit
+const contactForm = document.getElementById('contactForm');
 document.getElementById('sendBtn').addEventListener('click', function () {
-  const email = document.querySelector('#contact input[type="email"]').value;
-  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
-  this.textContent = '✓ Message Sent — We\'ll be in touch soon';
-  this.style.background = 'linear-gradient(135deg, #00c896, #00a87a)';
+  const firstName = contactForm.firstName.value.trim();
+  const lastName = contactForm.lastName.value.trim();
+  const email = contactForm.emailAddress.value.trim();
+  const organisation = contactForm.organisation.value.trim();
+  const interest = contactForm.interest.value;
+  const message = contactForm.message.value.trim();
+
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  if (!interest) {
+    alert('Please select an area of interest.');
+    return;
+  }
+
+  const subject = `Enquiry from ${firstName || 'Prospect'} ${lastName || ''}`.trim();
+  const body = [
+    `Name: ${firstName} ${lastName}`.trim(),
+    `Email: ${email}`,
+    `Organisation: ${organisation || 'N/A'}`,
+    `Area of Interest: ${interest}`,
+    '',
+    'Message:',
+    message || '(No additional details provided)'
+  ].join('\n');
+
+  const mailtoLink = `mailto:hello@datapro.technology?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailtoLink;
+
+  const originalText = this.textContent;
+  this.textContent = 'Opening mail client…';
   this.disabled = true;
+
+  setTimeout(() => {
+    this.textContent = originalText;
+    this.disabled = false;
+  }, 2500);
 });
 </script>
 </body>
